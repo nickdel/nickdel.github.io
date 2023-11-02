@@ -1,1 +1,0 @@
-# nickdel.github.co
