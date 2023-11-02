@@ -29,6 +29,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     let container = document.querySelector('.container');
+	let clipboardText = document.getElementById('clipboardText');
     let addButton = document.getElementById('addButton');
     let loadDataButton = document.getElementById('loadData');
     let dataInput = document.getElementById('dataInput');
@@ -36,6 +37,10 @@
     let copyToClipboard = function (event) {
       if (event.target.tagName === 'INPUT' && (event.target.name === 'registrationNumber' || event.target.name === 'postcode')) {
         navigator.clipboard.writeText(event.target.value);
+		
+		let text = event.target.value;
+            clipboardText.value = text;
+		
         //alert('Copied to clipboard: ' + event.target.value);
       }
     };
@@ -92,6 +97,10 @@
         container.appendChild(row);
       });
     };
+	
+	function resetPage() {
+            location.reload();
+        }
 
     addButton.addEventListener('click', ()=> addFields(1));
 
@@ -106,6 +115,8 @@
 <div class="loader">
 <textarea id="dataInput" rows="6" placeholder="Enter data here (one row per line, comma-separated)"></textarea>
  <br /> <button id="loadData">Load Data</button>
+<button onclick="resetPage()">Reset</button>
+<input type="text" id="clipboardText" readonly style="margin-top: 10px; width: 100%;" placeholder=""/>
  </div>
 <div class="container">
   
