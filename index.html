@@ -12,19 +12,33 @@
   .row {
     margin-bottom: 10px;
   }
-  input, textarea, button {
+  .row input {
     margin-top: 10px;
     margin-right: 10px;
+  }
+  .row input[type="text"]:first-child {
+    border: none; /* Removes the border */
+    background: #f1f1f1; /* Gives a distinctive background */
+  }
+  .row input[type="text"]:not(:first-child) {
+    cursor: pointer;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+  }
+  .row input[type="text"]:not(:first-child):hover,
+  .row input[type="text"]:not(:first-child):focus {
+    background-color: #e0e0e0;
+  }
+  .row input[type="text"]:not(:first-child):active {
+    background-color: #d0d0d0;
   }
   button {
     margin-top: 20px;
   }
-  .loader{
-	margin: 10px;
-	}
-	.adder{
-	margin: 10px;
-	}
+  .loader, .adder {
+    margin: 10px;
+  }
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -101,6 +115,15 @@
 	function resetPage() {
             location.reload();
         }
+		
+	// Additional JavaScript for styling buttons on click
+	  document.addEventListener('click', function (event) {
+		if (event.target.tagName === 'INPUT' && event.target.type === 'text' && event.target.name !== 'name') {
+		  event.target.style.backgroundColor = '#c0c0c0'; // Change color on click
+		  setTimeout(() => { // Remove color after a short delay
+			event.target.style.backgroundColor = '#f9f9f9';
+		  }, 150);
+		}
 
     addButton.addEventListener('click', ()=> addFields(1));
 
