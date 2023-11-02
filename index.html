@@ -39,7 +39,7 @@
         navigator.clipboard.writeText(event.target.value);
 		
 		let text = event.target.value;
-            clipboardText.value = text;
+            clipboardText.value = 'Copied to clipboard: ' + text;
 		
         //alert('Copied to clipboard: ' + event.target.value);
       }
@@ -116,7 +116,7 @@
 <textarea id="dataInput" rows="6" placeholder="Enter data here (one row per line, comma-separated)"></textarea>
  <br /> <button id="loadData">Load Data</button>
 <button onclick="resetPage()">Reset</button>
-<input type="text" id="clipboardText" readonly style="margin-top: 10px; width: 100%;" placeholder=""/>
+<input type="text" id="clipboardText" readonly style="margin-top: 10px; border:0px; width: 100%;" placeholder=""/>
  </div>
 <div class="container">
   
