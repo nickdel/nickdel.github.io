@@ -36,7 +36,7 @@
     let copyToClipboard = function (event) {
       if (event.target.tagName === 'INPUT' && (event.target.name === 'registrationNumber' || event.target.name === 'postcode')) {
         navigator.clipboard.writeText(event.target.value);
-        alert('Copied to clipboard: ' + event.target.value);
+        //alert('Copied to clipboard: ' + event.target.value);
       }
     };
 
