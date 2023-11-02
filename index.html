@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+  .container {
+    margin: 10px;
+  }
+  .row {
+    margin-bottom: 10px;
+  }
+  input, textarea, button {
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  button {
+    margin-top: 20px;
+  }
+  .loader{
+	margin: 10px;
+	}
+	.adder{
+	margin: 10px;
+	}
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let container = document.querySelector('.container');
+    let addButton = document.getElementById('addButton');
+    let loadDataButton = document.getElementById('loadData');
+    let dataInput = document.getElementById('dataInput');
+
+    let copyToClipboard = function (event) {
+      if (event.target.tagName === 'INPUT' && (event.target.name === 'registrationNumber' || event.target.name === 'postcode')) {
+        navigator.clipboard.writeText(event.target.value);
+        alert('Copied to clipboard: ' + event.target.value);
+      }
+    };
+
+    let addFields = function (num) {
+      for (let i = 0; i < num; i++) {
+        let row = document.createElement('div');
+        row.className = 'row';
+        let nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.name = 'name';
+        nameInput.placeholder = 'Name';
+        let registrationNumberInput = document.createElement('input');
+        registrationNumberInput.type = 'text';
+        registrationNumberInput.name = 'registrationNumber';
+        registrationNumberInput.placeholder = 'Registration Number';
+        let postcodeInput = document.createElement('input');
+        postcodeInput.type = 'text';
+        postcodeInput.name = 'postcode';
+        postcodeInput.placeholder = 'Postcode';
+        row.appendChild(nameInput);
+        row.appendChild(registrationNumberInput);
+        row.appendChild(postcodeInput);
+        container.appendChild(row);
+      }
+    };
+
+    let loadData = function () {
+      let data = dataInput.value.split('\n');
+      data.forEach(function (line) {
+        let [name, regNumber, postcode] = line.split(',').map(function (item) {
+          return item.trim();
+        });
+        let row = document.createElement('div');
+        row.className = 'row';
+        let nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.name = 'name';
+        nameInput.value = name;
+        nameInput.placeholder = 'Name';
+        let registrationNumberInput = document.createElement('input');
+        registrationNumberInput.type = 'text';
+        registrationNumberInput.name = 'registrationNumber';
+        registrationNumberInput.value = regNumber;
+        registrationNumberInput.placeholder = 'Registration Number';
+        let postcodeInput = document.createElement('input');
+        postcodeInput.type = 'text';
+        postcodeInput.name = 'postcode';
+        postcodeInput.value = postcode;
+        postcodeInput.placeholder = 'Postcode';
+        row.appendChild(nameInput);
+        row.appendChild(registrationNumberInput);
+        row.appendChild(postcodeInput);
+        container.appendChild(row);
+      });
+    };
+
+    addButton.addEventListener('click', ()=> addFields(1));
+
+    loadDataButton.addEventListener('click', loadData);
+
+    container.addEventListener('click', copyToClipboard);
+
+  });
+</script>
+</head>
+<body>
+<div class="loader">
+<textarea id="dataInput" rows="6" placeholder="Enter data here (one row per line, comma-separated)"></textarea>
+ <br /> <button id="loadData">Load Data</button>
+ </div>
+<div class="container">
+  
+  
+</div>
+<div class="adder">
+<button id="addButton">Add Row</button>
+</div>
+</body>
+</html>
